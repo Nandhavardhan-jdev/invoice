@@ -5,8 +5,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import org.springframework.stereotype.Service;
 
@@ -49,7 +51,9 @@ public class PdfService {
 			pdfPCell.setFixedHeight(25);
 			Paragraph bookingDate = new Paragraph();
 			bookingDate.add(new Phrase("Booking Date : ", title));
-			bookingDate.add(new Phrase(""+LocalDate.now(), content));
+			SimpleDateFormat dateFormat = new SimpleDateFormat("MMM  dd,  yyyy");
+			String date = dateFormat.format(new Date());
+			bookingDate.add(new Phrase(date, content));
 			pdfPCell.addElement(bookingDate);
 			pdfPTable.addCell(pdfPCell);
 			document.add(pdfPTable);
